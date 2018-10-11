@@ -1,0 +1,11 @@
+version: '3'
+services:
+  firefoxapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: test-firefox
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      DISPLAY: $DISPLAY

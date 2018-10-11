@@ -1,0 +1,25 @@
+version: "3"
+services:
+  mygrafana:
+    image: grafana/grafana:5.1.3
+    container_name: test-grafana
+    ports:
+      - 3000:3000
+    volumes:
+      - ./data/grafana:/var/lib/grafana:rw
+    restart: always
+  
+  postgres:
+    image: postgres:latest
+    container_name: test-postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./init/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    restart: always
+    environment:
+      POSTGRES_USER: something
+      POSTGRES_PASSWORD: something
+      POSTGRES_DB: something
+
